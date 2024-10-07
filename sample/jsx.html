@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    /**
+     * ReactJS에서 제공하는 문법 JSX를 이용하여 element 즉, Component를 생성하여 rendering을 수행한다.
+     *
+     */
+
+    const root = document.getElementById("root");
+    const Title = () => (
+      <h3 onMounseEnter={() => console.log("JSX Mounse Enter Event Func!")}>
+        H3 Test Title
+      </h3>
+    );
+    const Button = () => (
+      <button
+        style={{ backgroundColor: "tomato" }}
+        onClick={() => console.log("JSX Button OnClick Event Func!")}
+      >
+        Click Me
+      </button>
+    );
+
+    /* div 요소 내부에다가 위에 선언한 요소를 렌더링한다. */
+    const Container = () => (
+      <div>
+        <Title />
+        <Button />
+      </div>
+    );
+
+    ReactDOM.render(<Container />, root);
+  </script>
+</html>

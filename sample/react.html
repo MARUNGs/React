@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script>
+    /*
+      React로 element 생성 및 이벤트 구현
+
+      첫번째 인자: element 요소 명칭
+      두번째 인자: element 요소의 property
+      세번째 인자: element 요소의 content
+    */
+    const [root, h3, btn] = [
+      document.getElementById("root"),
+      React.createElement(
+        "h3",
+        {
+          onMounseEnter: () => console.log("Mouse Enter"),
+        },
+        "H3 blah blah"
+      ),
+      React.createElement(
+        "button",
+        {
+          /*이벤트함수 property 삽입 가능, ReactJS에서 이벤트 주입 시 onClick 등으로 표현함*/
+          onClick: () => console.log("Click Check"),
+          style: {
+            backgroundColor: "tomato",
+          },
+        },
+        "Click Me"
+      ),
+    ];
+
+    // 여러개의 element 요소를 한번에 rendering 하려면? div 요소 이용하여 배열로 삽입
+    const container = React.createElement("div", null, [h3, btn]);
+
+    ReactDOM.render(container, root);
+  </script>
+</html>
