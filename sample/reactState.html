@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root")
+    function App() {
+      let [count, setCount] = React.useState(0)
+      console.log(React.useState(0))
+      const onClick = () => {
+        // 현재 데이터를 기준으로 계산할 경우
+        setCount((current) => ++current) // setCount(count + 1)
+      }
+
+      return (
+        <div>
+          <h3>Total Click : {count}</h3>
+          <button onClick={onClick}>Click Me</button>
+        </div>
+      )
+    }
+
+    ReactDOM.render(<App />, root)
+  </script>
+</html>
