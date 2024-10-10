@@ -8,11 +8,58 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function App() {
+    /* km -> mile || mile -> km */
+    function KmToMiles() {
+      const [unit, setUnit] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+
+      // func
+      const reset = () => setUnit(0);
+      const onChange = (e) => setUnit(e.target.value);
+      const onFlip = () => {
+        reset();
+        setFlipped((flag) => !flag);
+      };
+
+      return (
+        <div>
+          <h3>Km to Miles</h3>
+          <div>
+            <label htmlFor="miles">miles</label>
+            <input
+              value={flipped ? unit * 0.6213711922 : unit}
+              disabled={flipped}
+              onChange={onChange}
+              id="miles"
+              type="number"
+              placeholder="miles"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="km">km</label>
+            <input
+              value={flipped ? unit : Math.round(unit / 0.6213711922)}
+              disabled={!flipped}
+              onChange={onChange}
+              id="km"
+              type="number"
+              placeholder="km"
+            />
+          </div>
+
+          <button onClick={reset}>reset</button>
+          <button onClick={onFlip}>flipped</button>
+        </div>
+      );
+    }
+
+    /* 분 -> 시 || 시 -> 분 */
+    function MinutesToHours() {
       const [amount, setAmount] = React.useState();
       const [flipped, setFlipped] = React.useState(false);
       const onChange = (event) => setAmount(event.target.value);
-      const reset = () => setAmount(0);
+      const reset = () => setAmount(null);
       const onFlip = () => {
         reset();
         setFlipped((currentFlag) => !currentFlag);
@@ -20,9 +67,7 @@
 
       return (
         <div>
-          <h3 className="hi">Super Converter</h3>
-          <h4>convert {amount}</h4>
-
+          <h3 className="hi">Minutes To Hours</h3>
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
@@ -40,6 +85,7 @@
             <input
               value={flipped ? amount : Math.round(amount / 60)}
               disabled={!flipped}
+              onChange={onChange}
               id="hours"
               type="number"
               placeholder="Hours"
@@ -48,6 +94,31 @@
 
           <button onClick={reset}>reset</button>
           <button onClick={onFlip}>flipped</button>
+        </div>
+      );
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState("xx");
+
+      // change event listning - select의 option value를 동기화시킬 수 있음
+      const onSelect = (e) => {
+        setIndex(e.target.value);
+      };
+
+      // JSX를 이용한 컴포넌트 선택
+      return (
+        <div>
+          <h3>Super Converter</h3>
+          <select value={index} onChange={onSelect}>
+            <option value="xx">Select your units</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">Km & Miles</option>
+          </select>
+
+          <hr />
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
         </div>
       );
     }
