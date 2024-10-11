@@ -4,8 +4,8 @@
     <div id="root"></div>
   </body>
 
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
@@ -60,17 +60,12 @@
         <>
           <MemorizedBtn text={text} fontSize={18} changeText={changeText} />
           <MemorizedBtn text="Continue" />
-          <MemorizedBtn text={[]} fontSize={"Continue"} />
+          <MemorizedBtn text={14} fontSize={"Continue"} />
         </>
       );
     }
 
     const root = document.getElementById("root");
-    ReactDOM.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-      root
-    );
+    ReactDOM.render(<App />, root);
   </script>
 </html>
