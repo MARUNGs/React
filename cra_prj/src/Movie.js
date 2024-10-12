@@ -1,42 +1,29 @@
-import { useEffect, useState } from "react";
-import MovieDetail from "./components/MovieDetail";
+/*
+  ☝🏻  Movie Component는 더이상 소스코드를 직접 관리하지않고 
+      Router를 통해 Rendering을 집중적으로 수행하게 된다.
+ */
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
 
 function Movie() {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-
-  const getMovies = async () => {
-    const json = await (
-      await fetch(
-        "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year"
-      )
-    ).json();
-
-    setMovies(json.data.movies);
-    setLoading(false);
-  };
-  // useEffect 안에서 실행했던 소스코드는 async-await로 묶인 함수로 처리를 변경하였음
-  useEffect(() => {
-    getMovies();
-  }, []);
-
   return (
-    <div>
-      {loading ? (
-        <h1>잠시만 기다려 주세요...</h1>
-      ) : (
-        // 영화 목록 생성
-        movies.map((movie) => (
-          <MovieDetail
-            key={movie.id}
-            mediumCoverImage={movie.medium_cover_image}
-            title={movie.title}
-            summary={movie.summary}
-            genres={movie.genres}
-          />
-        ))
-      )}
-    </div>
+    <Router>
+      {/* 
+          라우터를 쓰려고 했으나 React DOM과 React Router DOM 버전이 안맞아서
+          React Router DOM 버전 업을 하고 다르게 작업하였음.
+          ☝🏻 <Switch> -> <Route> 대체됨
+          ☝🏻 Route Component 하위 트리에 자식 컴포넌트를 호출하지 않고,
+            element prop에 자식 컴포넌트를 할당하도록 변경됨
+          ☝🏻 path prop = 이동할 경로 url 작성
+      */}
+      <Routes>
+        {/* 사용자가 "/" url 경로로 접근한다면, Home Component를 렌더링하세요. */}
+        <Route path="/" element={<Home />} />
+        {/* 사용자가 "/movie" url 경로로 접근한다면, Detail Component를 렌더링하세요. */}
+        <Route path="/movie" element={<Detail />} />
+      </Routes>
+    </Router>
   );
 }
 
