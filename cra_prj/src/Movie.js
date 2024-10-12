@@ -20,8 +20,9 @@ function Movie() {
       <Routes>
         {/* 사용자가 "/" url 경로로 접근한다면, Home Component를 렌더링하세요. */}
         <Route path="/" element={<Home />} />
-        {/* 사용자가 "/movie" url 경로로 접근한다면, Detail Component를 렌더링하세요. */}
-        <Route path="/movie" element={<Detail />} />
+        {/* 사용자가 "/movie" url 경로로 접근한다면, Detail Component를 렌더링하세요.
+            :parameter ???? 👉🏻 url에 파라미터를 삽입하여 특정 파라미터에 맞는 url을 호출하도록 설정가능  */}
+        <Route path="/movie/:id" element={<Detail />} />
       </Routes>
     </Router>
   );
